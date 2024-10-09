@@ -919,7 +919,7 @@ app.get('/api/restaurants/location/:restaurantLocation',async (req,res) =>{
   }
 })
 
-app.get('/hotels',async (req,res) =>{
+app.get('/api/hotels',async (req,res) =>{
   try{
     const hotel = await readAllHotel()
     if(hotel)
@@ -1064,19 +1064,10 @@ app.get('/test', (req, res) => {
   res.json({ message: 'Test route working' });
 });
 
-app.get('/api/hello', (req, res) => {
-  res.json({ message: 'Hello from API' });
-});
-
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-});
-
-// This should be the last route
-app.use('*', (req, res) => {
-  res.status(404).json({ error: "Not Found" });
 });
 
 module.exports = app;

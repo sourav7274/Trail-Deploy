@@ -1054,6 +1054,17 @@ app.delete("/hotelss/:hId",async (req,res) =>{
   }
 })
 
+
+const cors = require("cors");
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
+
+
 app.get('/', (req, res) => {
   res.json({ message: 'Welcome to the API' });
 });

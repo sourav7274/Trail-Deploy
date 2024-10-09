@@ -1059,23 +1059,34 @@ app.delete("/hotelss/:hId",async (req,res) =>{
   }
 })
 
+// Add this near the top of your file
+console.log('Server starting...')
+
+app.use((req, res, next) => {
+  console.log(`Request received: ${req.method} ${req.url}`)
+  next()
+})
+
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the API' });
-});
+  console.log('Root route hit')
+  res.json({ message: 'Welcome to the API' })
+})
 
 app.get('/test', (req, res) => {
-  res.json({ message: 'Test route working' });
-});
+  console.log('Test route hit')
+  res.json({ message: 'Test route working' })
+})
 
-// Catch-all route for unmatched paths
+// Add this catch-all route at the end
 app.use('*', (req, res) => {
-  res.status(404).json({ error: "Not Found" });
-});
+  console.log('Catch-all route hit')
+  res.status(404).json({ error: "Not Found" })
+})
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+  console.log(`Server is running on port ${PORT}`)
+})
 
-module.exports = app;
+module.exports = app

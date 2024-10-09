@@ -22,44 +22,42 @@ initialDatabase()
 async function deleteRecipeByID(id)
 {
   try{
-    const data = await Recipe.findByIdAndDelete(id)
+    return await Recipe.findByIdAndDelete(id)
   } catch(error)
   {
     throw error
   }
 }
-console.log('Application starting...');
-app.delete('/api/recipes/:id',async (req,res) =>{
+
+app.delete('/recipes/:id',async (req,res) =>{
   try{
-    const delteData = await deleteRecipeByID(req.params.id)
-    res.status(200).json({message:"Delete Successfull"})
-  } catch{
-    res.status(500).json({error:"Unable to fetch"})
+    const deletedData = await deleteRecipeByID(req.params.id)
+    res.status(200).json({message:"Delete Successful", data: deletedData})
+  } catch(error){
+    res.status(500).json({error:"Unable to delete", details: error.message})
   }
 })
-app.get('/api/test', (req, res) => {
-  console.log("Test endpoint hit");
+
+app.get('/test', (req, res) => {
   res.json({ message: 'Test endpoint works!' });
 });
-
 
 async function updateRecipeByTitle(name,data)
 {
   try{
-    const updateData = await Recipe.findOneAndUpdate({title:name},data,{new:true})
-    return updateData
+    return await Recipe.findOneAndUpdate({title:name},data,{new:true})
   } catch(error)
   {
     throw error
   }
 }
 
-app.post('/api/recipe/title/:name',async (req,res) =>{
+app.post('/recipe/title/:name',async (req,res) =>{
   try{
     const recipe = await updateRecipeByTitle(req.params.name,req.body)
-    res.status(200).json({message:'Update successfull',data:recipe})
-  } catch{
-    res.status(500).json({error:"Unable to seed"})
+    res.status(200).json({message:'Update successful',data:recipe})
+  } catch(error){
+    res.status(500).json({error:"Unable to update", details: error.message})
   }
 })
 
@@ -74,7 +72,7 @@ async function updateRecipeById(id,data)
   }
 }
 
-app.post('/api/recipes/:id',async (req,res) =>{
+app.post('/recipes/:id',async (req,res) =>{
   try{
     const data = await updateRecipeById(req.params.id,req.body)
     res.status(200).json({message:"Update Successfull",data:data})
@@ -95,7 +93,7 @@ async function getRecipeByDiff(name)
   }
 }
 
-app.get('/api/recipe/diff/:name',async (req,res) =>{
+app.get('/recipe/diff/:name',async (req,res) =>{
   try{
     const recipe = await getRecipeByDiff(req.params.name)
     if(recipe.length!=0)
@@ -122,7 +120,7 @@ async function getRecipeByAuthor(name)
   }
 }
 
-app.get('/api/recipe/author/:name',async (req,res) =>{
+app.get('/recipe/author/:name',async (req,res) =>{
   try{
     const recipe = await getRecipeByAuthor(req.params.name)
     res.status(200).json({message:"Success",data:recipe})
@@ -142,7 +140,7 @@ async function getRecipeByTitle(name)
   }
 }
 
-app.get('/api/recipe/title/:name',async (req,res) =>{
+app.get('/recipe/title/:name',async (req,res) =>{
   try{
     const recipe = await getRecipeByTitle(req.params.name)
     res.status(200).json({message:"Success",data:recipe})
@@ -162,7 +160,7 @@ async function getRecipeById(id)
   }
 }
 
-app.get('/api/recipe/:id',async (req,res) =>{
+app.get('/recipe/:id',async (req,res) =>{
   try{
     const recipe = await getRecipeById(req.params.id)
     res.status(200).json({message:"Success",data:recipe})
@@ -182,7 +180,7 @@ async function getRecipe()
   }
 }
 
-app.get('/api/recipe',async (req,res) =>{
+app.get('/recipe',async (req,res) =>{
   try{
     const data = await getRecipe()
     res.status(200).json({message:"Data Fetched",data:data})
@@ -204,7 +202,7 @@ async function createRecipe(data)
   }
 }
 
-app.post('/api/recipes',async (req,res) =>{
+app.post('/recipes',async (req,res) =>{
   try{
     const saveData = await createRecipe(req.body)
     res.status(201).json({message:"Saved",data:saveData})
@@ -229,7 +227,7 @@ async function addBook(book)
   }
 }
 
-app.post('/api/books',async (req,res) =>{
+app.post('/books',async (req,res) =>{
   try{
     const savyBook = await addBook(req.body)
     res.status(201).json({message:"Addedd Successfull",savyBook:savyBook})
@@ -323,7 +321,7 @@ async function deleteBook(id)
 }
 
 
-app.get('/api/books',async (req,res) =>{
+app.get('/books',async (req,res) =>{
   try{
     const book = await getallBook()
     if(data)
@@ -338,7 +336,7 @@ app.get('/api/books',async (req,res) =>{
   }
 })
 
-app.get('/api/books/title/:title',async (req,res) =>{
+app.get('/books/title/:title',async (req,res) =>{
   try{
     const book = await getBookByTitle(req.params.title)
     if(book.length!=0)
@@ -354,7 +352,7 @@ app.get('/api/books/title/:title',async (req,res) =>{
   }
 })
 
-app.get('/api/books/author/:author',async (req,res) =>{
+app.get('/books/author/:author',async (req,res) =>{
   try{
     const data = await getBookByAuthor(req.params.author)
     if(data.length!=0)
@@ -369,7 +367,7 @@ app.get('/api/books/author/:author',async (req,res) =>{
   }
 })
 
-app.get('/api/books/genre/:genre',async (req,res) =>{
+app.get('/books/genre/:genre',async (req,res) =>{
   try{
     const data = await getBookByGenre(req.params.genre)
     if(data.length!=0)
@@ -384,7 +382,7 @@ app.get('/api/books/genre/:genre',async (req,res) =>{
   }
 })
 
-app.get('/api/books/publish/:year',async (req,res) =>{
+app.get('/books/publish/:year',async (req,res) =>{
   try{
     const data = await getBookByYear(req.params.year)
     if(data.length!=0)
@@ -399,7 +397,7 @@ app.get('/api/books/publish/:year',async (req,res) =>{
   }
 })
 
-app.post('/api/books/:id',async (req,res) =>{
+app.post('/books/:id',async (req,res) =>{
   try{
     const updateData = await updateBookbyID(req.params.id,req.body)
     res.json({message:"Update Successfull",data:updateData})
@@ -408,7 +406,7 @@ app.post('/api/books/:id',async (req,res) =>{
   }
 })
 
-app.post('/api/books/title/:name',async (req,res) =>{
+app.post('/books/title/:name',async (req,res) =>{
   try{
     const updateData = await updateBookByTitle(req.params.name,req.body)
     res.json({message:"Update Successfull",data:updateData})
@@ -417,7 +415,7 @@ app.post('/api/books/title/:name',async (req,res) =>{
   }
 })
 
-app.delete('/api/books/:id',async (req,res) =>{
+app.delete('/books/:id',async (req,res) =>{
   try{
     const delBook = await deleteBook(req.params.id)
     res.status(200).json({message:"Delete Successfull"})
@@ -438,7 +436,7 @@ async function createRestaurant(newRestaurant){
     }
 }
 
-app.post('/api/restaurants',async (req,res) =>{
+app.post('/restaurants',async (req,res) =>{
   try{  
     const saveRes = await createRestaurant(req.body)
     res.status(201).json({message:"Data added"})
@@ -458,7 +456,7 @@ app.post('/api/restaurants',async (req,res) =>{
     }
   }
 
-  app.post('/api/movies',async (req,res) =>{
+  app.post('/movies',async (req,res) =>{
     try{
      const saveMovie = await createMovie(req.body)
       res.status(201).json({message:"Movie added "})
@@ -479,7 +477,7 @@ async function createHotel(data){
     }
 }
 
-app.post('/api/hotel',async (req,res) =>{
+app.post('/hotel',async (req,res) =>{
   try{
     const saveHotel = await createHotel(req.body)
     res.status(201).json({message:"New Entry "})
@@ -679,7 +677,7 @@ async function updateMovienew(id,data)
   }
 }
 
-app.post('/api/movies/update/:id' ,async (req,res) =>{
+app.post('/movies/update/:id' ,async (req,res) =>{
   try{
     const updatedmovie = await updateMovienew(req.params.id,req.body)
     if(updatedmovie)
@@ -706,7 +704,7 @@ async function uodateRes(id,data)
   }
 }
 
-app.post('/api/res/:id',async (req,res) =>{
+app.post('/res/:id',async (req,res) =>{
   try{
     const updateR = await uodateRes(req.params.id,req.body)
     res.status(200).json({message:"Update Succesffuly",data:updateR})
@@ -726,7 +724,7 @@ async function updateHotelById(id,data)
   }
 }
 
-app.post('/api/ho/:id',async(req,res) =>{
+app.post('/ho/:id',async(req,res) =>{
   try{
     const hos = await updateHotelById(req.params.id,req.body)
     res.status(200).json({message:"DOne",data:hos})
@@ -789,7 +787,7 @@ app.post('/api/ho/:id',async(req,res) =>{
 
 // readCars("Coupe")
 
-app.get('/api/movies/:title',async (req,res) =>{
+app.get('/movies/:title',async (req,res) =>{
   try{
       const movie = await readMovie(req.params.title)
       if(movie)
@@ -806,7 +804,7 @@ app.get('/api/movies/:title',async (req,res) =>{
   }
 })
 
-app.get('/api/allMovies', async (req,res) =>{
+app.get('/allMovies', async (req,res) =>{
   try{
     const movies = await readAllMovies()
     if(movies)
@@ -823,7 +821,7 @@ app.get('/api/allMovies', async (req,res) =>{
   }
 })
 
-app.get('/api/movies/director/:directorName', async (req,res) =>{
+app.get('/movies/director/:directorName', async (req,res) =>{
   try{
     const movie = await findByDirec(req.params.directorName)
     if(movie)
@@ -840,7 +838,7 @@ app.get('/api/movies/director/:directorName', async (req,res) =>{
 })
 
 
-app.get('/api/restaurants',async (req,res) =>{
+app.get('/restaurants',async (req,res) =>{
   try{  
     const restaurant = await readAllRes()
     if(restaurant)
@@ -856,7 +854,7 @@ app.get('/api/restaurants',async (req,res) =>{
   }
 })
 
-app.get('/api/restaurants/:resName',async (req,res) =>{
+app.get('/restaurants/:resName',async (req,res) =>{
   try{  
     const restaurant = await readRes(req.params.resName)
     if(restaurant)
@@ -872,7 +870,7 @@ app.get('/api/restaurants/:resName',async (req,res) =>{
   }
 })
 
-app.get('/api/restaurants/directory/:phoneNumber',async (req,res) =>{
+app.get('/restaurants/directory/:phoneNumber',async (req,res) =>{
   try{
     const restaurant = await readResPhone(req.params.phoneNumber)
     if(restaurant)
@@ -887,7 +885,7 @@ app.get('/api/restaurants/directory/:phoneNumber',async (req,res) =>{
     res.status(500).json({error:"Unable to Fetch"})
   }
 })
-app.get('/api/restaurants/cuisine/:cuisineName',async (req,res) =>{
+app.get('/restaurants/cuisine/:cuisineName',async (req,res) =>{
   try{
     const restaurant = await readResCuisisne(req.params.cuisineName)
     if(restaurant)
@@ -902,7 +900,7 @@ app.get('/api/restaurants/cuisine/:cuisineName',async (req,res) =>{
     res.status(500).json({error:"Unable to Fetch"})
   }
 })
-app.get('/api/restaurants/location/:restaurantLocation',async (req,res) =>{
+app.get('/restaurants/location/:restaurantLocation',async (req,res) =>{
   try{
     const restaurant = await readResLocation(req.params.restaurantLocation)
     if(restaurant)
@@ -919,7 +917,7 @@ app.get('/api/restaurants/location/:restaurantLocation',async (req,res) =>{
   }
 })
 
-app.get('/api/hotels',async (req,res) =>{
+app.get('/hotels',async (req,res) =>{
   try{
     const hotel = await readAllHotel()
     if(hotel)
@@ -935,7 +933,7 @@ app.get('/api/hotels',async (req,res) =>{
   }
 })
 
-app.get('/api/hotels/:hotelName',async (req,res) =>{
+app.get('/hotels/:hotelName',async (req,res) =>{
   try{
     const hotel = await readHotel(req.params.hotelName)
     if(hotel)
@@ -951,7 +949,7 @@ app.get('/api/hotels/:hotelName',async (req,res) =>{
   }
 })
 
-app.get('/api/hotels/directory/:phoneNumber',async (req,res) =>{
+app.get('/hotels/directory/:phoneNumber',async (req,res) =>{
   try{
     const hotel = await readHotelPhone(req.params.phoneNumber)
     if(hotel)
@@ -966,7 +964,7 @@ app.get('/api/hotels/directory/:phoneNumber',async (req,res) =>{
     res.status(500).json({error:"Unable to fetch"})
   }
 })
-app.get('/api/hotels/rating/:hotelRating',async (req,res) =>{
+app.get('/hotels/rating/:hotelRating',async (req,res) =>{
   try{
     const hotel = await readHotelRating(req.params.hotelRating)
     if(hotel)
@@ -981,7 +979,7 @@ app.get('/api/hotels/rating/:hotelRating',async (req,res) =>{
     res.status(500).json({error:"Unable to fetch"})
   }
 })
-app.get('/api/hotels/category/:hotelCategory',async (req,res) =>{
+app.get('/hotels/category/:hotelCategory',async (req,res) =>{
   try{
     const hotel = await readHotelCategory(req.params.hotelCategory)
     if(hotel)
@@ -1008,7 +1006,7 @@ async function deleteMovie(movieId)
   }
 }
 
-app.delete('/api/movies/:id',async(req,res) =>{
+app.delete('/movies/:id',async(req,res) =>{
   try{
     const delteMovie = await deleteMovie(req.params.id)
     res.status(200).json({message:"Delete Successfull"})
@@ -1027,7 +1025,7 @@ async function deleteRes(id)
   }
 }
 
-app.delete('/api/restaurant/:rId',async (req,res) =>{
+app.delete('/restaurant/:rId',async (req,res) =>{
   try{
     const delteRes = await deleteRes(req.params.rId)
     res.status(200).json({message:"Delete Successull"})
@@ -1047,7 +1045,7 @@ async function deleteHotel2(id)
   }
 }
 
-app.delete("/api/hotelss/:hId",async (req,res) =>{
+app.delete("/hotelss/:hId",async (req,res) =>{
   try{
     const deleteHotel = await deleteHotel2(req.params.hId)
     res.status(200).json({message:"Deleted Successully"})

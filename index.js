@@ -1,7 +1,9 @@
 const {initialDatabase} = require('./db/db.connect')
 const express = require('express')
 const app = express()
+const cors = require("cors");
 
+app.use(cors(corsOptions));
 app.use(express.json())
 
 const fs = require("fs")
@@ -13,6 +15,11 @@ const { title } = require('process')
 const Restaurant = require('./models/hw/latres.models')
 
 const Recipe = require('./models/recipe.models')
+const corsOptions = {
+  origin: "*",
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 
 const Hotel = require('./models/hw/hotel.models')
 const { error } = require('console')
@@ -1055,14 +1062,7 @@ app.delete("/hotelss/:hId",async (req,res) =>{
 })
 
 
-const cors = require("cors");
-const corsOptions = {
-  origin: "*",
-  credentials: true,
-  optionSuccessStatus: 200,
-};
 
-app.use(cors(corsOptions));
 
 
 app.get('/', (req, res) => {

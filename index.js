@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const cors = require("cors");
 
-app.use(cors(corsOptions));
+
 app.use(express.json())
 
 const fs = require("fs")
@@ -20,7 +20,7 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 };
-
+app.use(cors(corsOptions));
 const Hotel = require('./models/hw/hotel.models')
 const { error } = require('console')
 initialDatabase()

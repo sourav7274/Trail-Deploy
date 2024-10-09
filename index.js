@@ -1079,8 +1079,8 @@ app.get('/test', (req, res) => {
 
 // Add this catch-all route at the end
 app.use('*', (req, res) => {
-  console.log('Catch-all route hit')
-  res.status(404).json({ error: "Not Found" })
+  console.log(`Catch-all route hit for: ${req.originalUrl}`)
+  res.status(404).json({ error: "Not Found", path: req.originalUrl })
 })
 
 const PORT = process.env.PORT || 3000

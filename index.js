@@ -10,7 +10,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 // Your original routes
-app.get('/api/recipe', async (req, res) => {
+app.get('/recipe', async (req, res) => {
   try {
     const data = await getRecipe();
     res.status(200).json({ message: "Data Fetched", data: data });
@@ -19,7 +19,7 @@ app.get('/api/recipe', async (req, res) => {
   }
 });
 
-app.post('/api/recipes', async (req, res) => {
+app.post('/recipes', async (req, res) => {
   try {
     const saveData = await createRecipe(req.body);
     res.status(201).json({ message: "Saved", data: saveData });

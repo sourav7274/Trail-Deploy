@@ -7,15 +7,28 @@ app.use((req, res, next) => {
   next();
 });
 
-// Root route
-app.get('/', (req, res) => {
-  res.send('Hello from the root route!');
+app.use(express.json());
+
+// Your original routes
+app.get('/api/recipe', async (req, res) => {
+  try {
+    const data = await getRecipe();
+    res.status(200).json({ message: "Data Fetched", data: data });
+  } catch (error) {
+    res.status(500).json({ error: "Unable to fetch" });
+  }
 });
 
-// Test route
-app.get('/test', (req, res) => {
-  res.send('Hello from the test route!');
+app.post('/api/recipes', async (req, res) => {
+  try {
+    const saveData = await createRecipe(req.body);
+    res.status(201).json({ message: "Saved", data: saveData });
+  } catch (error) {
+    res.status(500).json({ error: "Unable to send data" });
+  }
 });
+
+// ... Add more of your routes here ...
 
 // Catch-all route
 app.use('*', (req, res) => {

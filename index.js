@@ -617,7 +617,7 @@ async function readResLocation(name)
 async function readHotel(hName)
 {
   try{
-    const data = await Hotel.find({phoneNumber: hName})
+    const data = await Hotel.find({name: hName})
     console.log(data)
     return data
   } catch(error)  

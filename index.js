@@ -247,7 +247,7 @@ app.post('/books',async (req,res) =>{
 async function getallBook()
 {
   try{
-    const book  = await  Book.find()
+    const book  = await Book.find()
     return book
   } catch(error)
   {
@@ -328,10 +328,10 @@ async function deleteBook(id)
 }
 
 
-app.get('/books',async (req,res) =>{
+app.get('/AllBooks',async (req,res) =>{
   try{
     const book = await getallBook()
-    if(data)
+    if(book)
     {
       res.status(200).json({message:"Success",data:book})
     }

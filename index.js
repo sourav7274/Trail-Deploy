@@ -484,7 +484,7 @@ async function createHotel(data){
     }
 }
 
-app.post('/hotel',async (req,res) =>{
+app.post('/addHotel',async (req,res) =>{
   try{
     const saveHotel = await createHotel(req.body)
     res.status(201).json({message:"New Entry "})

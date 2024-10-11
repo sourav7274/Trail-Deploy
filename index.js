@@ -488,8 +488,8 @@ app.post('/addHotel',async (req,res) =>{
   try{
     const saveHotel = await createHotel(req.body)
     res.status(201).json({message:"New Entry "})
-  }catch{
-    res.status(500).json({error:"Unable to send data"})
+  }catch(error){
+    res.status(500).json({error:"Unable to send data",error:error})
   }
 })
 

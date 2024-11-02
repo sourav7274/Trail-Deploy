@@ -1,0 +1,162 @@
+[
+    {
+        "name": "Jack Sparrow",
+        "age": 21,
+        "gender": "Male",
+        "marks": 75,
+        "attendance": 88,
+        "grade": "B"
+    },
+    {
+        "name": "Luna Lovegood",
+        "age": 20,
+        "gender": "Female",
+        "marks": 90,
+        "attendance": 95,
+        "grade": "A"
+    },
+    {
+        "name": "Peter Parker",
+        "age": 22,
+        "gender": "Male",
+        "marks": 82,
+        "attendance": 90,
+        "grade": "B"
+    },
+    {
+        "name": "Rachel Green",
+        "age": 19,
+        "gender": "Female",
+        "marks": 88,
+        "attendance": 92,
+        "grade": "A"
+    },
+    {
+        "name": "Tony Stark",
+        "age": 23,
+        "gender": "Male",
+        "marks": 95,
+        "attendance": 97,
+        "grade": "A"
+    },
+    {
+        "name": "Wanda Maximoff",
+        "age": 21,
+        "gender": "Female",
+        "marks": 85,
+        "attendance": 89,
+        "grade": "B"
+    },
+    {
+        "name": "Bruce Wayne",
+        "age": 24,
+        "gender": "Male",
+        "marks": 78,
+        "attendance": 80,
+        "grade": "C"
+    },
+    {
+        "name": "Hermione Granger",
+        "age": 20,
+        "gender": "Female",
+        "marks": 92,
+        "attendance": 94,
+        "grade": "A"
+    },
+    {
+        "name": "Clark Kent",
+        "age": 22,
+        "gender": "Male",
+        "marks": 76,
+        "attendance": 82,
+        "grade": "C"
+    },
+    {
+        "name": "Natasha Romanoff",
+        "age": 19,
+        "gender": "Female",
+        "marks": 89,
+        "attendance": 91,
+        "grade": "A"
+    },
+    {
+        "name": "Diana Prince",
+        "age": 23,
+        "gender": "Female",
+        "marks": 84,
+        "attendance": 90,
+        "grade": "B"
+    },
+    {
+        "name": "Steve Rogers",
+        "age": 21,
+        "gender": "Male",
+        "marks": 80,
+        "attendance": 85,
+        "grade": "B"
+    },
+    {
+        "name": "Gandalf the Grey",
+        "age": 24,
+        "gender": "Male",
+        "marks": 91,
+        "attendance": 96,
+        "grade": "A"
+    },
+    {
+        "name": "Frodo Baggins",
+        "age": 20,
+        "gender": "Male",
+        "marks": 77,
+        "attendance": 78,
+        "grade": "C"
+    },
+    {
+        "name": "Samwise Gamgee",
+        "age": 19,
+        "gender": "Male",
+        "marks": 82,
+        "attendance": 88,
+        "grade": "B"
+    },
+    {
+        "name": "Bilbo Baggins",
+        "age": 22,
+        "gender": "Male",
+        "marks": 85,
+        "attendance": 90,
+        "grade": "B"
+    },
+    {
+        "name": "Albus Dumbledore",
+        "age": 25,
+        "gender": "Male",
+        "marks": 95,
+        "attendance": 99,
+        "grade": "A"
+    },
+    {
+        "name": "Sirius Black",
+        "age": 23,
+        "gender": "Male",
+        "marks": 88,
+        "attendance": 92,
+        "grade": "A"
+    },
+    {
+        "name": "Luna Lovegood",
+        "age": 20,
+        "gender": "Female",
+        "marks": 90,
+        "attendance": 95,
+        "grade": "A"
+    },
+    {
+        "name": "Neville Longbottom",
+        "age": 21,
+        "gender": "Male",
+        "marks": 76,
+        "attendance": 80,
+        "grade": "C"
+    }
+]

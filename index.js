@@ -13,7 +13,7 @@ const Book = require('./models/hw/book.model')
 const Car = require('./models/hw/cars.models')
 const { title } = require('process')
 const Restaurant = require('./models/hw/latres.models')
-
+const { Student } = require("./models/students.models");
 const Recipe = require('./models/recipe.models')
 const corsOptions = {
   origin: "*",
@@ -1061,8 +1061,91 @@ app.delete("/hotelss/:hId",async (req,res) =>{
   }
 })
 
+app.get("/students", async (req, res) => {
+  try {
+    const students = await Student.find();
+    res.json(students);
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
+app.post("/students", async (req, res) => {
+  const { name, age, gender, marks, attendance, grade } = req.body;
 
+  try {
+    const student = new Student({ name, age, gender, marks, attendance, grade });
+    await student.save();
+    res.status(201).json(student);
+    console.log(student)
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: "Internal Server Error", details: error.message });
+  }
+});
+
+app.put("/students/:id", async (req, res) => {
+  const studentId = req.params.id;
+  const updatedStudentData = req.body;
+
+  try {
+    const updatedStudent = await Student.findByIdAndUpdate(
+      studentId,
+      updatedStudentData,
+      { new: true },
+    );
+
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json(updatedStudent);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.delete("/students/:id", async (req, res) => {
+  const studentId = req.params.id;
+
+  try {
+    const deletedStudent = await Student.findByIdAndRemove(studentId);
+
+    if (!deletedStudent) {
+      return res.status(404).json({ error: "Student not found" });
+    }
+
+    res
+      .status(200)
+      .json({
+        message: "Student deleted successfully",
+        student: deletedStudent,
+      });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// USE WHen Needed
+
+// app.post("/students/import", async (req, res) => {
+//   fs.readFile('students.json', 'utf8', async (err, data) => {
+//       if (err) {
+//           return res.status(500).json({ error: "Error reading file", details: err.message });
+//       }
+
+//       try {
+//           const students = JSON.parse(data); // Parse the JSON data
+//           const savedStudents = await Student.insertMany(students); // Bulk insert
+//           res.status(201).json(savedStudents); // Return the saved student objects
+//       } catch (error) {
+//           console.error(error);
+//           res.status(500).json({ error: "Internal Server Error", details: error.message });
+//       }
+//   });
+// });
 
 
 app.get('/', (req, res) => {
